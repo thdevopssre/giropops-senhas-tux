@@ -1,6 +1,7 @@
 .terraform/
 *.backup
 *.hcl
+*.lock.hcl
 *.tfstate
 *.tfvars
 *.out
