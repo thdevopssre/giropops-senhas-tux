@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "giropops-senhas.fullname" . }}
+  name: {{ template "giropops-senhas.name" . }}
   labels:
-    {{- include "giropops-senhas.labels" . | nindent 4 }}
+    app: {{ template "giropops-senhas.name" . }}
 spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
   selector:
-    {{- include "giropops-senhas.selectorLabels" . | nindent 4 }}
+    app: {{ template "giropops-senhas.name" . }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.containerPort }}
+      name: {{ .Values.service.name }}
+  type: {{ .Values.service.type }}
